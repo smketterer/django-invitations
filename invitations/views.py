@@ -33,9 +33,10 @@ class SendInvite(LoginRequiredMixin, FormView):
         except Exception:
             return self.form_invalid(form)
 
-        return self.render_to_response(
-            self.get_context_data(
-                success_message='%s has been invited' % email))
+        return self.render_to_response({
+            'form': form,
+            'success_message': '%s has been invited' % email
+        })
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
